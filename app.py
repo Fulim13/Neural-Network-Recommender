@@ -90,7 +90,7 @@ recommendation_model = RecommendationSystemModel(
     hidden_dim=256,
     dropout_rate=0.1,
 ).to(device)
-recommendation_model.load_state_dict(torch.load("recommendation_model.pt"))
+recommendation_model.load_state_dict(torch.load("recommendation_model.pt",map_location=torch.device('cpu')))
 recommendation_model.eval()
 
 
