@@ -146,15 +146,18 @@ movie_ratings.sort(key=lambda x: x[1], reverse=True)
 
 top_n_movie_ids = []
 top_n_movie_names = []
+top_n_movie_genres = []
 for movie_id, _ in movie_ratings:
     if movie_id in movies_df.movieId.values:
         top_n_movie_ids.append(movie_id)
         movie_index = movies_df[movies_df.movieId == movie_id].index[0]
         top_n_movie_names.append(movies_df.title.values[movie_index])
+        top_n_movie_genres.append(movies_df.genres.values[movie_index])
         if len(top_n_movie_ids) == 10:
             break
 
 # st.write("Top 10 movie recommendations:")
 st.markdown("#### Top 10 movie recommendations:")
-for i, movie_name in enumerate(top_n_movie_names, start=1):
-    st.write(f"{i}. {movie_name}")
+for i, movie_name in enumerate(top_n_movie_names, start=0):
+    st.write(f"{i+1}. {movie_name} (Genres: {top_n_movie_genres[i]})")
+    # st.write(f"{i+1}. {movie_name} (ID: {top_n_movie_ids[i]}) | (Genres: {top_n_movie_genres[i]})")
