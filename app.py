@@ -101,6 +101,7 @@ st.title("Movie Recommendation System")
 
 # user_id = st.selectbox("Select a user ID", df["userId"].unique())
 user_id = st.sidebar.selectbox("Select a user ID", df["userId"].unique())
+user_id_shown = user_id
 
 le_user = preprocessing.LabelEncoder()
 le_movie = preprocessing.LabelEncoder()
@@ -118,7 +119,7 @@ original_seen_movie_ids = le_movie.inverse_transform(list(seen_movie_ids))
 seen_movies = movies_df[movies_df['movieId'].isin(original_seen_movie_ids)]
 
 # st.write("Movies seen by the selected user:")
-st.markdown("#### Movies seen by the selected user:")
+st.markdown(f"#### Movies seen by the User {user_id_shown}:")
 # st.write(seen_movies)
 st.dataframe(seen_movies)
 
@@ -157,7 +158,7 @@ for movie_id, _ in movie_ratings:
             break
 
 # st.write("Top 10 movie recommendations:")
-st.markdown("#### Top 10 movie recommendations:")
+st.markdown(f"#### Top 10 movie recommendations for User {user_id_shown}:")
 for i, movie_name in enumerate(top_n_movie_names, start=0):
     st.write(f"{i+1}. {movie_name} (Genres: {top_n_movie_genres[i]})")
     # st.write(f"{i+1}. {movie_name} (ID: {top_n_movie_ids[i]}) | (Genres: {top_n_movie_genres[i]})")
