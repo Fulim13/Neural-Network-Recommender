@@ -119,6 +119,10 @@ original_seen_movie_ids = le_movie.inverse_transform(list(seen_movie_ids))
 
 seen_movies = movies_df[movies_df['movieId'].isin(original_seen_movie_ids)]
 
+# Separate genres by "|"
+# seen_movies["genres"] = seen_movies["genres"].apply(lambda x: x.replace("|", ", "))
+seen_movies["genres"] = seen_movies["genres"].str.split('|')
+
 # st.write("Movies seen by the selected user:")
 st.markdown(f"#### Movies seen by the User {user_id_shown}:")
 # st.write(seen_movies)
@@ -165,5 +169,5 @@ for movie_id, _ in movie_ratings:
 # st.write("Top 10 movie recommendations:")
 st.markdown(f"#### Top {num_recommendations} movie recommendations for User {user_id_shown}:")
 for i, movie_name in enumerate(top_n_movie_names, start=0):
-    st.write(f"{i+1}. {movie_name} (Genres: {top_n_movie_genres[i]})")
+    st.write(f"{i+1}. {movie_name} (Genres: {top_n_movie_genres[i].replace('|', ', ')})")
     # st.write(f"{i+1}. {movie_name} (ID: {top_n_movie_ids[i]}) | (Genres: {top_n_movie_genres[i]})")
