@@ -121,7 +121,7 @@ seen_movies = movies_df[movies_df['movieId'].isin(original_seen_movie_ids)]
 
 # Separate genres by "|"
 # seen_movies["genres"] = seen_movies["genres"].apply(lambda x: x.replace("|", ", "))
-seen_movies["genres"] = seen_movies["genres"].str.split('|')
+seen_movies.loc[:, "genres"] = seen_movies["genres"].str.split('|')
 
 # st.write("Movies seen by the selected user:")
 st.markdown(f"#### Movies seen by the User {user_id_shown}:")
@@ -148,7 +148,10 @@ predicted_ratings = []
 with torch.no_grad():
     for data in data_loader:
         output = recommendation_model(data["users"].to(device), data["movies"].to(device))
-        predicted_ratings.extend(output.squeeze().tolist())
+        output_list = output.squeeze().tolist()
+        if isinstance(output_list, float):
+            output_list = [output_list]
+        predicted_ratings.extend(output_list)
 
 movie_ratings = list(zip(unseen_movie_ids, predicted_ratings))
 
