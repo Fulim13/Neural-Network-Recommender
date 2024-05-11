@@ -124,6 +124,10 @@ st.markdown(f"#### Movies seen by the User {user_id_shown}:")
 # st.write(seen_movies)
 st.dataframe(seen_movies)
 
+# Add a dropdown menu to select the number of recommendations
+# num_recommendations = st.sidebar.selectbox("Select the number of recommendations", [3, 5, 10, 15, 20])
+num_recommendations = st.sidebar.slider("Select the number of recommendations", 1, 100, 10, step=1)
+
 unseen_movie_ids = all_movie_ids - seen_movie_ids
 unseen_movie_ids = list(unseen_movie_ids)
 
@@ -155,11 +159,11 @@ for movie_id, _ in movie_ratings:
         movie_index = movies_df[movies_df.movieId == movie_id].index[0]
         top_n_movie_names.append(movies_df.title.values[movie_index])
         top_n_movie_genres.append(movies_df.genres.values[movie_index])
-        if len(top_n_movie_ids) == 10:
+        if len(top_n_movie_ids) == num_recommendations:
             break
 
 # st.write("Top 10 movie recommendations:")
-st.markdown(f"#### Top 10 movie recommendations for User {user_id_shown}:")
+st.markdown(f"#### Top {num_recommendations} movie recommendations for User {user_id_shown}:")
 for i, movie_name in enumerate(top_n_movie_names, start=0):
     st.write(f"{i+1}. {movie_name} (Genres: {top_n_movie_genres[i]})")
     # st.write(f"{i+1}. {movie_name} (ID: {top_n_movie_ids[i]}) | (Genres: {top_n_movie_genres[i]})")
