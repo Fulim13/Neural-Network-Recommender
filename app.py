@@ -97,8 +97,8 @@ recommendation_model.eval()
 
 
 # Streamlit app
-st.title("Movie Recommendation System")
-st.markdown("##### Recommending movies using a Neural Network Collaborative Filtering model.")
+st.title("Neural Network Collaborative Filtering Movie Recommender")
+# st.markdown("##### Recommending movies using a Neural Network Collaborative Filtering model.")
 
 # user_id = st.selectbox("Select a user ID", df["userId"].unique())
 user_id = st.sidebar.selectbox("Select a user ID", df["userId"].unique())
