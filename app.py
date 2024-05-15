@@ -97,8 +97,22 @@ recommendation_model.eval()
 
 
 # Streamlit app
+
+# col1, col2, col3 = st.columns(3)
+
+# with col1:
+#     st.write(' ')
+
+# with col2:
+#     st.image("https://static.streamlit.io/examples/dog.jpg")
+
+# with col3:
+#     st.write(' ')
+# color: blue, green, red, violet, orange
+# st.title(":blue[Neural Network Collaborative Filtering Movie Recommender ]")
+# st.markdown("<h1 style='font-family:Courier; font-size: 20px; text-align: center; color: grey;'>Big headline</h1>", unsafe_allow_html=True)
 st.title("Neural Network Collaborative Filtering Movie Recommender")
-# st.markdown("##### Recommending movies using a Neural Network Collaborative Filtering model.")
+st.markdown("##### Recommending movies using a Neural Network Collaborative Filtering model.")
 
 # user_id = st.selectbox("Select a user ID", df["userId"].unique())
 user_id = st.sidebar.selectbox("Select a user ID", df["userId"].unique())
