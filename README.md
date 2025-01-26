@@ -1,6 +1,3 @@
-# Website Demo
-[Website Link](https://nnrecommender.streamlit.app/)
-
 # Dataset
 [Movie Lens (ml-latest-small) Dataset](https://grouplens.org/datasets/movielens/)
 
